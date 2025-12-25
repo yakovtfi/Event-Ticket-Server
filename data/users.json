@@ -1,25 +1,9 @@
 [
   {
-    "id": "1766651295835",
-    "username": "yakov",
-    "password": "$2b$10$xgDRDxEi02HNlNkW24zV1u5tSw4ac/6f/CIYLBgedOI48fEzt2OyW",
-    "createdAt": "2025-12-25T08:28:15.835Z"
-  },
-  {
-    "username": "yossi",
-    "password": "050956",
-    "createdAt": "2025-12-25T08:31:46.250Z"
-  },
-  {
-    "id": "1766651757737",
-    "username": "yosi",
-    "password": "$2b$10$JMAN/TqnXOF8W9BhO4Xmxu3OiKy.QmrxU9H0mu9PFQvm1CAh3YC4W",
-    "createdAt": "2025-12-25T08:35:57.738Z"
-  },
-  {
-    "id": "1766651794538",
+    "id": "1766655474394",
     "username": "yo",
-    "password": "$2b$10$UWzWNugGpXgs96lWjXoPcu2AtyIWE3hsoY4kTnxdDCfFVAx7fH6ja",
-    "createdAt": "2025-12-25T08:36:34.538Z"
+    "password": "$2b$10$evKYd75J4KKIOV6RYfJPLujoytTZZH033G6Xit1X5SRxnNG3et6Wi",
+    "role": "admin",
+    "createdAt": "2025-12-25T09:37:54.395Z"
   }
 ]

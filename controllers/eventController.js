@@ -2,6 +2,16 @@ import { readJsonFile, writeJsonFile } from '../utils/fileHelper.js';
 import { validateUser } from './userController.js';
 
 
+export const validateUserRole = async (username, password) => {
+  const users = await readJsonFile('users.json');
+  const user = users.find(u => u.username === username && u.password === password);
+  if (!user) return null;
+  if (user.role === 'admin') {
+    return { error: 'Admin users cannot create events' };
+  }
+  return user;
+};
+
 export const createEvent = async (req, res) => {
   try {
     const { eventName, ticketsForSale, username, password } = req.body;
@@ -9,18 +19,22 @@ export const createEvent = async (req, res) => {
     if (!eventName || !ticketsForSale || !username || !password) {
       return res.status(400).json({ error: 'All fields are required' });
     }
-
-    const user = await validateUser(username, password);
-    if (!user) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+// bonus 1
+    const userValidation = await validateUserRole(username, password);
+    if (!userValidation || userValidation.error) {
+      return res.status(401).json({ error: userValidation?.error || 'Invalid credentials' });
     }
+    const user = userValidation;
 
     const events = await readJsonFile('events.json');
 
+
     const newEvent = {
+      id: Date.now(),
       eventName,
       ticketsAvailable: ticketsForSale,
-      createdBy: username
+      createdBy: username,
+      createdAt: new Date().toISOString()
     };
 
     events.push(newEvent);

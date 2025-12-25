@@ -3,7 +3,7 @@ import { readJsonFile, writeJsonFile } from '../utils/fileHelper.js';
 
 export const registerUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password,role ='user' } = req.body;
 
     if (!username || !password) {
       return res.status(400).json({ error: 'Username and password are required' });
@@ -12,6 +12,12 @@ export const registerUser = async (req, res) => {
     if (password.length < 6) {
       return res.status(400).json({ error: 'Password must be at least 6 characters' });
     }
+// bonus 1
+    if(!['user','admin'].includes(role)){
+       return res.status(400).json({ error: 'Role must be either "user" or "admin"' });
+    }
+
+    
 
     const users = await readJsonFile('users.json');
 
@@ -25,7 +31,9 @@ export const registerUser = async (req, res) => {
       id: Date.now().toString(),
       username,
       password: hashedPassword,
+      role,
       createdAt: new Date().toISOString()
+    
     };
 
     users.push(newUser);
